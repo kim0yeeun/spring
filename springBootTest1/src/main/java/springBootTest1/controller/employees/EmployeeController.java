@@ -28,6 +28,7 @@ public class EmployeeController {
 	public String empWrite(EmployeeCommand employeeCommand, Model model) {
 		// Controller->Service
 		// servlet request로 받는 대신에 command 사용
+		// request에서 갖고온 (spring이 알아서) 값을 command로 받음
 		String path = employeeWriteService.execute(employeeCommand,model);
 		return path;
 	}
