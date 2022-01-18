@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springBootTest2.mapper.MemberShipMapper">
+<sql id="AutoNum">
+	select nvl(max(substr(MEM_NUM,5)),100000) + 1 from member
+</sql>
+<insert id="memberInsert" 
+	parameterType="springBootTest2.domain.MemberDTO">
+insert into member(MEM_NUM,MEM_NAME,MEM_REGI_DATE, MEM_ID, MEM_PW,
+				   MEM_PHONE1,MEM_PHONE2,MEM_ADDR,MEM_EMAIL,MEM_GENDER,
+				   MEM_BIRTH)
+values(concat('kosa',( <include refid="AutoNum" /> )),#{memName},sysdate,#{memId},
+		#{memPw},#{memPhone1},#{memPhone2},#{memAddr},#{memEmail},
+		#{memGender},#{memBirth})
+</insert>
+
+<update id="memberUpdate" parameterType="springBootTest2.domain.MemberDTO">
+	update member
+	set MEM_NAME =#{memName}, 
+		MEM_PHONE1 =#{memPhone1}, MEM_PHONE2 =#{memPhone2},
+		MEM_ADDR =#{memAddr}, MEM_EMAIL =#{memEmail},
+		MEM_GENDER =#{memGender}, MEM_BIRTH =#{memBirth}
+	where mem_num=#{memNum}
+</update>
+
+<update id="updatePassword" parameterType="springBootTest2.domain.MemberDTO">
+	update member 
+	set MEM_PW=#{memPw}
+	where MEM_ID=#{memId}
+</update>
+
+<delete id="memberDrop" parameterType="string">
+	delete from member
+	where mem_id = #{memId}
+</delete>
+<select id="selectOne" parameterType="string" 
+		resultType="springBootTest2.domain.MemberDTO">
+		select MEM_NUM memNum, MEM_NAME memName, MEM_REGI_DATE memRegiDate,
+			   MEM_ID memId, MEM_PW memPw, MEM_PHONE1 memPhone1, MEM_PHONE2 memPhone2,
+			   MEM_ADDR memAddr, MEM_EMAIL memEmail, MEM_GENDER memGender,
+			   MEM_BIRTH memBirth
+		from member
+		where mem_id=#{memId}
+
+</select>
+</mapper>
