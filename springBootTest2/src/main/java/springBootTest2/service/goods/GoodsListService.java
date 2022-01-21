@@ -1,4 +1,4 @@
-package springBootTest2.service.lib;
+package springBootTest2.service.goods;
 
 import java.util.List;
 
@@ -7,16 +7,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import springBootTest2.domain.LibDTO;
-import springBootTest2.mapper.LibMapper;
+import springBootTest2.domain.GoodsDTO;
+import springBootTest2.mapper.GoodsMapper;
 
 @Component
 @Service
-public class LibListService{
+public class GoodsListService {
 	@Autowired
-	LibMapper libMapper;
+	GoodsMapper goodsMapper;
 	public void execute(Model model) {
-		List<LibDTO> list = libMapper.selectAll();
+		List<GoodsDTO> list = goodsMapper.selectAll();
 		model.addAttribute("list", list);
 	}
 }

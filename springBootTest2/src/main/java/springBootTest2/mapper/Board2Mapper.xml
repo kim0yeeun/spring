@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="springBootTest2.mapper.Board2Mapper">
+	
+	<insert id="Insert" parameterType="springBootTest2.domain.Board2DTO">
+		insert into board2 (board_num, board_writer, board_subject, 
+							board_content, writer_ip, board_date)
+		values (seq_board_num.nextval, #{boardWriter}, #{boardSubject},
+				#{boardContent}, #{writerIp}, sysdate)
+	</insert>
+	
+	<select id="selectAll" resultType="springBootTest2.domain.Board2DTO">
+		select board_num boardNum , board_writer boardWriter , board_subject boardSubject ,
+			   board_content boardContent , writer_ip writerIp , board_date boardDate 
+		from board2
+		order by board_num desc
+	</select>
+	
+	<select id="selectOne" parameterType="string"
+			resultType="springBootTest2.domain.Board2DTO">
+		select board_num boardNum , board_writer boardWriter , board_subject boardSubject ,
+			   board_content boardContent , writer_ip writerIp , board_date boardDate 
+		from board2 
+		where board_num=#{boardNum}
+	</select>
+	
+	<update id="Update" parameterType="springBootTest2.domain.Board2DTO">
+		update board2 
+		set board_writer = #{boardWriter}, board_subject = #{boardSubject},
+			board_content = #{boardContent}
+		where board_num = #{boardNum}
+	</update>
+	
+	<delete id="Delete" parameterType="String">
+		delete from board2
+		where board_num=#{boardNum}
+	</delete>
+	
+	
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

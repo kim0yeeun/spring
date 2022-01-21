@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+직원 자료실 입니다. <br/>
+<table border=1>
+	<tr><td>게시글번호</td><td>글쓴이</td><td>제목</td></tr>
+	<th:block th:each="dto : ${list}">
+		<td><a th:href="@{emplibDetail(num=${dto.libNum})}">[[${dto.libNum}]]</a></td>
+		<td>[[${dto.libWriter}]]</td>
+		<td><a th:href="@{emplibDetail(num=${dto.libNum})}">[[${dto.libSubject}]]</a></td>
+	</tr>
+	</th:block>
+	
+</table>
+
+<a href="emplibWrite">게시글 쓰기</a>
+</body>
+</html>

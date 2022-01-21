@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>boardDetail</title>
+</head>
+<body>
+상세페이지입니다. <br/><br/>
+글쓴이 : [[${dto.boardWriter}]] || ip : [[${dto.writerIp}]]<br/>
+제목 : [[${dto.boardContent}]]<br/>
+내용 : [[${dto.boardSubject}]]<br/>
+작성일자 : [[${dto.boardDate}]]<br/><br/>
+<a th:href="@{boardModify(num=${dto.boardNum})}">수정</a>
+<a th:href="@{boardDelete(num=${dto.boardNum})}">삭제</a>
+</body>
+</html>

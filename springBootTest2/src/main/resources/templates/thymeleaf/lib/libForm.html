@@ -6,11 +6,13 @@
 </head>
 <body>
 자료 등록 페이지입니다. <br/>
-<form action="libWrite" method="post">
+<form action="libWrite" method="post" enctype="multipart/form-data">
 글쓴이 : <input type="text" name="libWriter" required="required"/><br/>
 제목 : <input type="text" name="libSubject" required="required"/><br/>
 내용 : <textarea rows="6" cols="30" name="libContent" required="required"></textarea><br/>
 비밀번호 : <input type="password" name="libPw" required="required"/><br/>
+파일 : <input type="file" name="report" multiple="multiple"/><br/>
+
 <input type="submit" value="작성하기"/>
 </form>
 </body>

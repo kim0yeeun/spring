@@ -1,6 +1,7 @@
 package springBootTest2.domain;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -14,4 +15,7 @@ public class LibDTO {
 	String memId;
 	String ipAddr;
 	String libPw;
+	String originalFileName;
+	String storeFileName;
+	String fileSize;
 }

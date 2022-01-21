@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="springBootTest2.mapper.GoodsMapper">
+<sql id="baseInfo">
+goods_num goodsNum, goods_name goodsName, goods_price goodsPrice,
+goods_date goodsDate, goods_content goodsContent, goods_qty goodsQty,
+goods_company goodsCompany, emp_num empNum
+</sql>
+
+<delete id="goodsDelete" parameterType="String">
+	delete from goods
+	where goods_num=#{goodsNum}
+</delete>
+
+<update id="goodsUpdate" parameterType="springBootTest2.domain.GoodsDTO">
+	update goods   
+	set  goods_name =#{goodsName}, goods_price = #{goodsPrice},
+		 goods_date = #{goodsDate}, goods_content = #{goodsContent},
+		 goods_qty = #{goodsQty}, goods_company = #{goodsCompany}
+	where goods_num = #{goodsNum}
+</update>
+
+<select id="autoNum" resultType="String">
+	select concat('kosa',nvl(max(substr(goods_num,5)),100000)+1) from goods
+</select>
+
+<select id="selectOne" parameterType="String" resultType="springBootTest2.domain.GoodsDTO">
+	select goods_num goodsNum, goods_name goodsName, goods_price goodsPrice,
+			goods_date goodsDate, goods_content goodsContent, goods_qty goodsQty,
+			goods_company goodsCompany, emp_num empNum
+	from goods
+	where goods_num=#{goodsNum}
+</select>
+
+<select id="selectAll" resultType="springBootTest2.domain.GoodsDTO">
+	select goods_num goodsNum, goods_name goodsName, goods_price goodsPrice,
+			goods_date goodsDate, goods_content goodsContent, goods_qty goodsQty,
+			goods_company goodsCompany, emp_num empNum
+	from goods
+</select>
+
+<insert id="goodsinsert" parameterType="springBootTest2.domain.GoodsDTO">
+	insert into goods (goods_num, goods_name, goods_price, goods_date, 
+	goods_content, goods_qty, goods_company, emp_num)
+	values(#{goodsNum}, #{goodsName}, #{goodsPrice}, #{goodsDate},
+	 #{goodsContent}, #{goodsQty}, #{goodsCompany}, #{empNum} )
+</insert>
+
+
+</mapper>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+게시글 수정페이지 입니다. <br /><br />
+<form action="boardModifyOk" method="post">
+<input type="hidden" name="boardNum" th:value="${dto.boardNum }"/>
+	<table>
+		<tr><td>작성자</td>
+			<td><input type="text" name="boardWriter" th:value="${dto.boardWriter }"></td>
+		</tr>
+		<tr><td>제목</td>
+			<td><input type="text" name="boardSubject" th:value="${dto.boardSubject}"></td>
+		</tr>
+		<tr><td>내용</td>
+			<td><textarea rows="6" cols="50" name="boardContent">[[${dto.boardContent}]]</textarea></td>
+		</tr>
+		<tr><th colspan=2>
+				<input type="submit" value="수정 완료"> 
+			</th></tr>
+	</table>
+</form>
+</body>
+</html>

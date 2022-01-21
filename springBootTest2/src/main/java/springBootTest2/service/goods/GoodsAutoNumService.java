@@ -1,22 +1,21 @@
-package springBootTest2.service.lib;
-
-import java.util.List;
+package springBootTest2.service.goods;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import springBootTest2.domain.LibDTO;
-import springBootTest2.mapper.LibMapper;
+import springBootTest2.mapper.GoodsMapper;
 
 @Component
 @Service
-public class LibListService{
+public class GoodsAutoNumService {
 	@Autowired
-	LibMapper libMapper;
+	GoodsMapper goodsMapper; 
 	public void execute(Model model) {
-		List<LibDTO> list = libMapper.selectAll();
-		model.addAttribute("list", list);
+		String num = goodsMapper.autoNum();
+		System.out.println(num);
+		model.addAttribute("goodsNum", num);
+		
 	}
 }

@@ -12,5 +12,8 @@ import springBootTest2.domain.LibDTO;
 public interface LibMapper {
 	public Integer LibInsert(LibDTO dto);
 	public List<LibDTO> selectAll();
+	public LibDTO selectOne(String libnum);
+	public Integer LibUpdate(LibDTO dto);
+	public Integer LibDelete(String libnum);
 
 }

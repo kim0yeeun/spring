@@ -17,7 +17,11 @@
 <tr><td><input type="text" name="id" placeholder="아이디입력" /><br/>
 		<span th:if="${err_id != null }" th:text="${err_id}" style="color:red"/></td>
 	<td rowspan=2>
-		<input type="submit" width="50px" height="50px" value="로그인"/>
+		<!--  이미지 하려고 고침! 
+		webconfig 할 필요없다 resource 밑에 static폴더는 그냥 사용 가능하지만 다른거는  webconfigㅇ해야함-->
+		<input type="image" src="/static/images/pic05.jpg"
+				width="80px" height="80px" id = "imgSubmit"/>
+	<!-- <input type="submit" width="50px" height="50px" value="로그인"/> -->
 	</td></tr>
 <tr><td><input type="password" name="pw" placeholder="비밀번호"/><br/>
 		<span th:if="${err_pw != null }" th:text="${err_pw}" style="color:red"/></td></tr>
@@ -30,12 +34,23 @@
 
 <th:block th:if="${session.authInfo != null}">
 <!-- 로그인 되었을 때 -->
-<a href="/emp/employeeList">직원 리스트</a> | 
-<a href="/lib/libList">자료실</a> |
+
+<a href="/board2/boardList">방구뿡 게시판</a> |
 <a href="/board/boardList">자유 게시판 목록</a> |
+<a href="/lib/libList">자료실</a> |
 <a href="/qna/qnaList">QnA 목록</a> |
-<a href="/mem/memberList">회원리스트</a> |
-<a href="/membership/memInfo">내 정보 보기</a> |
+
+<span th:switch="${session.authInfo.grade}">
+	<span th:case="emp">
+		<a href="/mem/memberList">회원리스트</a> |	
+		<a href="/emp/employeeList">직원 리스트</a> | 
+		<a href="/goods/goodsList">상품리스트</a> |
+		<a href="/emplib/libList">직원 자료실</a> |
+	</span>	
+	<span th:case="mem">
+		<a href="/membership/memInfo">내 정보 보기</a> |
+	</span>
+</span>
 <a href="/logout">로그아웃</a>
 </th:block>
 </body>
