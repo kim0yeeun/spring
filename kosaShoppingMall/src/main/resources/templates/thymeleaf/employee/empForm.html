@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+//	$(function(){
+//		$("#frm}").submit(function(){
+//			if($("#empPw").val() != $("#empPwCon").val()){
+//				alert("비밀번호 확인이 다릅니다.");
+//				return false;
+//			}
+//		});
+//	});
+	// 값을 하나씩 받아서 자바스트립트를 이용해서 비밀번호 확인 
+	// 이제 command로 값을 한번에 넘기니까 controller에서 쉽게 비교할 수 있음 
+</script>
+</head>	
+<body>
+직원등록 페이지입니다.<br />
+<form action="empWrite" method="post" th:object="${employeeCommand}">
+	아이디: <input type="text" name="empId"  th:value="${employeeCommand.empId}"/>
+	<span th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}"></span><br />
+	
+	비밀번호 : <input type="password" name="empPw" th:value="${employeeCommand.empPw}">
+	<span th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span><br />
+	
+	비밀번호확인 : <input type="password" name="empPwCon" th:value="${employeeCommand.empPwCon}"/>
+	<span th:if="${#fields.hasErrors('empPwCon')}" th:errors="*{empPwCon}"></span><br />
+	
+	이름 : <input type="text" name="empName" th:value="${employeeCommand.empName}"/>
+	<span th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span><br />
+	
+	주소 : <input type="text" name="empAddr" th:value="${employeeCommand.empAddr}"/>
+	<span th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br />
+	
+	연락처 : <input type="tel" name="empPhone" th:value="${employeeCommand.empPhone}"
+	 placeholder="031-1234-1234" />
+	<span th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span><br />
+	<input type="submit" value="직원등록"/>
+</form>
+</body>
+</html>

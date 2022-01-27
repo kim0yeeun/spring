@@ -1,11 +1,16 @@
 package springBootTest2.service.emplib;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import springBootTest2.command.EmplibCommand;
 import springBootTest2.domain.AuthInfo;
@@ -30,7 +35,7 @@ public class EmplibUpdateService {
 		EmplibDTO dto = emplibMapper.selectOne(libNum);
 		String empNum = dto.getEmpNum().toString();
 		EmployeeDTO dto1 = employeeMapper.selectOne(empNum);	
-		
+
 		if (!dto.getLibPw().equals(emplibCommand.getLibPw())) {
 			model.addAttribute("dto",dto);
 			model.addAttribute("err_pw", "비밀번호가 틀립니다.");
@@ -39,12 +44,60 @@ public class EmplibUpdateService {
 			model.addAttribute("dto",dto);
 			model.addAttribute("err_id","작성자가 아닙니다.");
 			path = "thymeleaf/emplib/libModify";
-		}else {
+		}else { 
+
 			dto.setLibWriter(emplibCommand.getLibWriter());
 			dto.setLibSubject(emplibCommand.getLibSubject());
 			dto.setLibContent(emplibCommand.getLibContent());
 			dto.setLibNum(Integer.parseInt(emplibCommand.getLibNum()));
+			
+			String [] storeFileNames = null;
+			
+			// 파일 
+			
+			if (dto.getStoreFileName() != null) {
+				storeFileNames = dto.getStoreFileName().split("`");
+				}
+			
+			String originalTotal = null;
+			String storeTotal = null;
+			String fileSizeTotal = null;
+			
+			String filePath = "/view/emplib";
+			String fileDir = session.getServletContext().getRealPath(filePath);
+			
+		
+			// 파일 업데이트 (새로운 파일 저장 후 원래 파일 삭제)
+			// 파일 저장
+			for(MultipartFile mf : emplibCommand.getReport()) {
+				String ofile = mf.getOriginalFilename();
+				String extension = ofile.substring(ofile.lastIndexOf("."));
+				String sfile = UUID.randomUUID().toString().replace("-","");
+				String storeFileName = sfile+extension;
+				String fileSize = Long.toString(mf.getSize());
+				File file = new File (fileDir+"/"+storeFileName);
+				try {
+					mf.transferTo(file);
+				} catch (Exception e) {e.printStackTrace();	}
+				originalTotal += ofile+"`";
+				storeTotal += storeFileName+"`";
+				fileSizeTotal = fileSize+"`";
+			}
+			dto.setFileSize(fileSizeTotal);
+			dto.setOriginalFileName(originalTotal);
+			dto.setStoreFileName(storeTotal);
+			
 			Integer i = emplibMapper.emplibUpdate(dto);
+			
+			if(i >0 ) {
+				for(String fileName : storeFileNames) {
+					File file = new File(fileDir + "/" + fileName);
+					if(file.exists())file.delete();
+				}
+			}
+		System.out.println("삭제");
+				
+			
 			model.addAttribute("dto",dto);	
 		}
 		

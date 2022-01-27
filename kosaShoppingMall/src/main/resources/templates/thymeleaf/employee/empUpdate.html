@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+수정 페이지입니다  <br/>
+<form action="empUpdate" method="post" th:object="${employeeCommand}">
+<!-- 에러메세지를 command에 받아옴 form태그에 적어줘야한다. -->
+아이디: <input type="text" name="empId" th:value="${employeeCommand.empId}" readonly="readonly"/><br />
+이름 : <input type="text" name="empName" th:value="${employeeCommand.empName}"  /><br />
+주소 : <input type="text" name="empAddr" th:value="${employeeCommand.empAddr}"  /><br />
+연락처 : <input type="tel" name="empPhone" placeholder="031-1234-1234"
+		th:value="${employeeCommand.empPhone}"  /><br />
+비밀번호 : <input type="password" name="empPw" id="empPw" required="required"> <br/>
+<span th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}" style="color:red"></span> <br/>
+<!-- 만약 폼태그 empPw에 에러가있다면				에러메세지를 출력해라 -->
+<input type="submit" value="수정완료"/>
+</form>
+</body>
+</html>

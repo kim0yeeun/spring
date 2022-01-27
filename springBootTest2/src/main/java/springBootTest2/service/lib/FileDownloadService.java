@@ -37,7 +37,7 @@ public class FileDownloadService {
 			// file(fis)을 outputstream(out1) 한테 복붙 -> 웹브라우저로 파일 전송 
 			// originalfilename이라는 이름으로 전송! 
 			FileCopyUtils.copy(fis, out1);
-			// flushBuffer: 버퍼에 저장되는 있는 내용 (out1 )을 클라이언트에 전송
+			// 버퍼에 저장되는 있는 내용 (out1 )을 클라이언트에 전송했으면 닫자 
 			response.flushBuffer();
 			// 버퍼 지우고 닫깅 
 			out1.flush();

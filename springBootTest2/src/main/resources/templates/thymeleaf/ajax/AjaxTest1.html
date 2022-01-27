@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AjaxTest2</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script>
+	// ajax에 들어가는 문법 제이슨이요? 홍현희..(key : value) 
+	// java에서는 map 파이썬에서는 dictionary (key : value)
+	function testDiv(num){
+		// location.href="ajax2?num="+num+"&num1"; // num 값은 li에서 testDiv(1,2,3) // get방식 
+		// 얘는 페이지 이동! 동기식!
+		// 동기식으로 열리는 위의 페이지는 html
+		// 밑에는 비동기식! 값만 갖고와줌  
+		// result 로 받아오니까 페이지 이동이 발생하지 않는ㄴ다.
+		$.ajax({
+			type:"post",
+			url:"ajax2", 
+			data:"num="+num,
+			dataType:"html",
+			success : function(result){
+				$("#notice_content").html(result);
+			},
+			error : function (){
+				alert('에러띠');
+				return;
+			}
+		});	
+	}
+	function testDiv1(num){
+		options = { // json 변수 
+				type:"post",
+				url:"ajax2", 
+				data:"num="+num,
+				dataType:"html",
+				success : function(result){
+					$("#notice_content").html(result);
+				},
+				error : function (){
+					alert('에러띠');
+					return;
+				}
+			}
+		$.ajax(options);	
+	}
+	
+	function beforeTest(){
+		if($("#n").val()==""){
+			alert("값을 입력하세요");
+			$("#n").focus();
+			return false;
+		}
+	}
+	function okTest(result, statusText, xhr, $form){ //사용해야 되는 값, success했을 떄의 상태, xhr머애, submit할대 내가 사용한 form 
+		$("#notice_content").html(result);
+		$form.css('background','red');
+	}
+	function errorTest(){
+		alert('에러띠');
+	}
+	
+	$(function(){ // form 태그의 ajax2의 페이지로 이동하는게 아니라 값을 갖고오고 싶으면 ajax
+		$("#btn1").click(function(){
+			$("#frm").ajaxSubmit({
+				type:"post",
+				dataType:"html",
+				beforeSubmit: beforeTest, // 자바스트립트 함수명
+				success : okTest,
+				error : errorTest
+			});
+		});
+	
+		bbb={
+				type:"post",
+				dataType:"html",
+				beforeSubmit: beforeTest, 
+				success : okTest,
+				error : errorTest
+				}
+		$("#btn2").click(function(){
+			$("#frm").ajaxSubmit(bbb);
+		});
+		
+		
+		$("#btn").click(function(){
+			$("#frm").ajaxSubmit({
+				type:"post",
+				dataType:"html",
+				beforeSubmit: function(){
+					if($("#n").val()==""){
+						alert("값을 입력하세요");
+						$("#n").focus();
+						return false;
+					}
+				},
+				success : function(result){
+					$("#notice_content").html(result);
+				},
+				error : function (){
+					alert('에러띠');
+					return;
+					}
+				});
+			});
+		});
+
+</script>
+</head>
+<body>
+
+<ul>
+	<li onclick="testDiv(1)">TV</li>
+	<li onclick="testDiv(2)">맛집</li>
+	<li onclick="testDiv(3)">뷰티</li>
+</ul>
+<div id="notice_content"></div>
+<form id="frm" action="ajax2">
+	<input type="text" id="n" name="num">
+</form>
+<button type="button" id="btn">전송</button>
+<button type="button" id="btn1">전송1</button>
+<button type="button" id="btn2">전송2</button>
+</body>
+</html>

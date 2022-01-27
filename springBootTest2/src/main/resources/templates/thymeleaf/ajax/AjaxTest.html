@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AjaxTest</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script>
+	function testDiv(num){
+		if(num==1){
+			op1.style.display="";
+			op2.style.display="none";
+			op3.style.display="none";
+		}else if (num==2){
+			op1.style.display="none";
+			op2.style.display="";
+			op3.style.display="none";
+		}else if (num==3){
+			op1.style.display="none";
+			op2.style.display="none";
+			op3.style.display="";
+		}
+	}
+</script>
+</head>
+<body>
+<!-- ajax는 대용량의 데이터를 갖고오지 않으므로 빠룸빠룸 -->
+
+<ul>
+	<li onclick="testDiv(1)">TV</li>
+	<li onclick="testDiv(2)">맛집</li>
+	<li onclick="testDiv(3)">뷰티</li>
+</ul>
+
+<div id="op1" >
+TV
+</div>
+<div id="op2" style="display:none">
+맛집
+</div>
+<div id="op3" style="display:none">
+뷰티
+</div>
+
+
+</body>
+</html>

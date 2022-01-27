@@ -7,23 +7,26 @@
 
 <insert id="emplibInsert" parameterType="springBootTest2.domain.EmplibDTO">
 	insert into emp_library (lib_num, lib_writer, lib_subject, lib_content, 
-						 	emp_num, ip_addr, lib_pw) 
+						 	emp_num, ip_addr, lib_pw, original_file_name, 
+						 	store_file_name, file_size) 
 	values(seq_num3.nextval, #{libWriter}, #{libSubject}, #{libContent},
-		   #{empNum}, #{ipAddr}, #{libPw})
+		   #{empNum}, #{ipAddr}, #{libPw}, #{originalFileName}, 
+		   #{storeFileName}, #{fileSize})
 </insert>
 
 <select id="selectAll" resultType="springBootTest2.domain.EmplibDTO">
 	select lib_num libNum, lib_writer libWriter, lib_subject libSubject, 
-		   lib_content libContent, emp_num empNum, 
-		   ip_addr ipAddr, lib_pw libPw
+		   lib_content libContent, emp_num empNum, original_file_name, 
+		   ip_addr ipAddr, lib_pw libPw, store_file_name, file_size
 	from emp_library
 </select>
 
 <select id="selectOne" parameterType="String"
 		resultType="springBootTest2.domain.EmplibDTO">
 	select lib_num libNum, lib_writer libWriter, lib_subject libSubject, 
-		   lib_content libContent, emp_num empNum, 
-		   ip_addr ipAddr, lib_pw libPw
+		   lib_content libContent, emp_num empNum, ip_addr ipAddr,
+		   lib_pw libPw, original_file_name originalFileName,
+		   store_file_name storeFileName, file_size fileSize
 	from emp_library
 	where lib_num=#{libNum}
 </select>
@@ -31,7 +34,10 @@
 <update id="emplibUpdate" parameterType="springBootTest2.domain.EmplibDTO">
 	update emp_library
 	set lib_writer =#{libWriter}, lib_subject =#{libSubject},
-		lib_content =#{libContent}
+		lib_content =#{libContent}, 
+		original_file_name = #{originalFileName}, 
+		store_file_name = #{storeFileName}, 
+		file_size = #{fileSize}		
 	where lib_num=#{libNum}
 </update>
 

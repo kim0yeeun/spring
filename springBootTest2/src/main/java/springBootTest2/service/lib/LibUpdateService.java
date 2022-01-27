@@ -110,8 +110,7 @@ public class LibUpdateService {
 			dto.setOriginalFileName(originalTotal);
 			dto.setStoreFileName(storeTotal);
 			// Mapper xml에 update 얘네 세개 추가 
-			libMapper.LibUpdate(dto);
-			
+	
 			Integer i = libMapper.LibUpdate(dto);
 			// 파일이 정상적으로 업로드가 된 이후에 파일 삭제
 			// 단, 파일이 삭제되지 않았을 경우에는 파일 삭제 안돼안돼

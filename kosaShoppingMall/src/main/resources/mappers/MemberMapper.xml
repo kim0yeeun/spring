@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 	
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosaShoppingMall.mapper.MemberMapper">
+
+	<delete id="memDelete">
+		delete from member
+		where mem_num = #{memNum}
+	</delete>
+	<update id="memUpdate" parameterType="memDTO">
+		update member 
+		set mem_name = #{memName}, mem_addr = #{memAddr}, mem_regi_date = #{memRegiDate}, 
+			mem_gender = #{memGender}, mem_phone = #{memPhone},
+			mem_birth = #{memBirth}, mem_email = #{memEmail}
+		where mem_num = #{memNum}
+	</update>
+	<select id="selectAll" resultType="memDTO">
+		select 	mem_num memNum, mem_id memId, mem_pw memPw, mem_name memName,
+				mem_addr memAddr,  mem_regi_date memRegiDate, mem_gender memGender,
+				mem_phone memPhone, mem_birth memBirth, mem_email memEmail
+		from member
+	</select>
+	<select id="selectOne" parameterType="string" resultType="memDTO">
+		select 	mem_num memNum, mem_id memId, mem_pw memPw, mem_name memName,
+				mem_addr memAddr,  mem_regi_date memRegiDate, mem_gender memGender,
+				mem_phone memPhone, mem_birth memBirth, mem_email memEmail
+		from member
+		where mem_num=#{memNum}
+	</select>
+	
+	<insert id="memInsert" parameterType="memDTO">
+		insert into member(mem_num, mem_id, mem_pw, mem_name, mem_addr,
+						   mem_regi_date, mem_gender, mem_phone, mem_birth,
+						   mem_email)
+		values(#{memNum}, #{memId}, #{memPw}, #{memName}, #{memAddr},
+				#{memRegiDate}, #{memGender}, #{memPhone},
+				#{memBirth}, #{memEmail})
+	</insert>
+	<select id="autoNum" resultType="string">
+		select concat('kosa',nvl(max(substr(mem_num,5)),100000)+1) from member
+	
+	</select>
+
+</mapper>
+	

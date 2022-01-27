@@ -2,6 +2,8 @@ package springBootTest2.domain;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 @Data
 public class GoodsDTO {
@@ -13,4 +15,5 @@ public class GoodsDTO {
 	Integer goodsQty;
 	String goodsCompany;
 	Integer empNum;
+	String goodsImages;
 }

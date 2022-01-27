@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>memList</title>
+</head>
+<body>
+회원 리스트입니다.
+<table border ="1">
+	<tr><td>회원번호</td><td>아이디</td><td>이름</td><td>연락처</td></tr>
+	<th:block th:each="memberCommand : ${list}">
+		<tr><td><a th:href="@{memDetail(memNum=${memberCommand.memNum})}">[[${memberCommand.memNum}]]</a></td>
+			<td><a th:href="@{memDetail(memNum=${memberCommand.memNum})}">[[${memberCommand.memId}]]</a></td>
+			<td>[[${memberCommand.memName}]]</td>
+			<td>[[${memberCommand.memPhone}]]</td>
+		</tr>
+	</th:block>
+</table>
+<a href="memRegist">회원 등록</a>
+</body>
+</html>

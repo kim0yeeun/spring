@@ -5,7 +5,7 @@
 <title>goodsForm.html</title>
 </head>
 <body>
-<form action="goodsRegist" method="post" name="frm" id="frm">
+<form action="goodsRegist" method="post" name="frm" id="frm" enctype="multipart/form-data">
 제품 번호 : <input type="text" name="goodsNum" readonly="readonly" 
 			th:value="${goodsNum}"/> : 자동부여 <br/>
 제품 이름 : <input type="text" name="goodsName" /> <br/>
@@ -14,6 +14,7 @@
 제품설명 :  <textarea rows="6" cols="30" name="goodsContent"></textarea><br/>
 수량 :  <input type="number" name="goodsQty" /> <br/>
 제조사 :   <input type="text" name="goodsCompany" /> <br/>
+이미지 : <input type="file" name="goodsImages" multiple="multiple"/> <br/>
 <input type="submit" value="제품 등록"/>
 </form>
 </body>

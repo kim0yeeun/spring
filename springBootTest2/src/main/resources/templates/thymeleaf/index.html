@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
-첫 페이지입니다.<br />
 <th:block th:if="${session.authInfo == null}">
 <!-- 로그인 안되었을 때  -->
 <form action="loginPro"  method="post" name="frm" id="frm">
@@ -29,8 +29,15 @@
 	아이디/비밀번호 찾기 | <a href="/membership/memberAgree">회원가입</a>
 	</td></tr>
 </table>
+
 </form>
 </th:block>
+
+
+<a href="/board/boardList">자유 게시판 목록</a> |
+<a href="/ajax/ajax1">Ajax</a> |
+<a href="/ajax/ajax3">Ajax1</a> |
+
 
 <th:block th:if="${session.authInfo != null}">
 <!-- 로그인 되었을 때 -->

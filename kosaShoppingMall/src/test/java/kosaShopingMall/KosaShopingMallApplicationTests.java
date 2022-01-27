@@ -1,0 +1,13 @@
+package kosaShopingMall;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class KosaShopingMallApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

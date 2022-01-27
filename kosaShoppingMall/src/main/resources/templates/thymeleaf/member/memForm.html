@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>memForm</title>
+</head>
+<body>
+회원 등록 페이지 입니다. <br/>
+<form action="memRegist" method="post">
+회원번호 : <input type="text" name="memNum" readonly="readonly" th:value="${memNum}"/> : 자동부여 <br/>
+회원아이디 : <input type="text" name="memId" /> <br/>
+비밀번호 : <input type="password" name="memPw" /> <br/>
+비밀번호 확인 : <input type="password" name="memPwCon"/>
+<span th:if="${memPwCon != null}" th:text="${memPwCon}" style="color:red"></span> <br/>
+<!--  <span th:if="${#fields.hasErrors('memPwCon')}" th:errors="*{memPwCon}"/> <br/>-->
+이름 : <input type="text" name="memName" /> <br/>
+주소 : <input type="text" name="memAddr" /> <br/>
+등록일 : <input type="date" name="memRegiDate" /> <br/>
+성별 : <input type="radio" name="memGender" value="F" checked/>여자
+          <input type="radio" name="memGender" value="M" />남자<br />
+연락처 :  <input type="tel" name="memPhone" /> <br/>
+생년월일 :  <input type="date" name="memBirth" /> <br/>
+이메일 :  <input type="email" name="memEmail" /> <br/>
+<input type="submit" value="전송"/> <br/>
+</form>
+</body>
+</html>

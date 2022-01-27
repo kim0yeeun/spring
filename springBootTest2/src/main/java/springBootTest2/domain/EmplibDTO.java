@@ -11,5 +11,9 @@ public class EmplibDTO {
 	Integer empNum; 
 	Integer libNum;
 	String ipAddr;
+	// 파일 추가 
+	String originalFileName;
+	String storeFileName;
+	String fileSize;
 	
 }

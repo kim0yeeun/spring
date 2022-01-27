@@ -1,5 +1,6 @@
 package springBootTest2.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import springBootTest2.command.GoodsCommand;
-import springBootTest2.service.board.GoodsDeleteService;
 import springBootTest2.service.goods.GoodsAutoNumService;
+import springBootTest2.service.goods.GoodsDeleteService;
 import springBootTest2.service.goods.GoodsDetailService;
 import springBootTest2.service.goods.GoodsListService;
 import springBootTest2.service.goods.GoodsUpdateService;
@@ -35,13 +36,15 @@ public class GoodsController {
 	
 	
 	@RequestMapping("goodsDelete")
-	public String goodsDelete(@RequestParam(value="num") String goodsNum) {
-		goodsDeleteService.execute(goodsNum);
+	public String goodsDelete(@RequestParam(value="num") String goodsNum, 
+			HttpServletRequest request) {
+		goodsDeleteService.execute(goodsNum, request);
 		return "redirect:goodsList";
 	}
 	@RequestMapping(value="goodsModifyOk", method = RequestMethod.POST)
-	public String goodsUpdate(GoodsCommand goodsCommand) {
-		goodsUpdateService.execute(goodsCommand);
+	public String goodsUpdate(GoodsCommand goodsCommand, 
+			HttpSession session) {
+		goodsUpdateService.execute(goodsCommand, session);
 		return "redirect:goodsDetail?num="+goodsCommand.getGoodsNum();
 	}
 	@RequestMapping("goodsModify")

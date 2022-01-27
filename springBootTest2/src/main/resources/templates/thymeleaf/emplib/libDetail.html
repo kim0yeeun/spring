@@ -19,11 +19,33 @@ $(function (){
 글쓴이 : [[${dto.libWriter}]]  | ip주소 : [[${dto.ipAddr}]]  <br/>
 제목 :  [[${dto.libSubject}]] <br/>
 내용 :  [[${dto.libContent}]] <br/>
+					     
+					     
+파일 : 
+<div th:each="file , idx: ${#strings.arraySplit(dto.originalFileName, '`')}">
+<!--  
+	<a th:href="|/emplib/${#strings.arraySplit(dto.storeFileName,'`')[idx.index]}|">[[${file}]]</a>  -->
+	<!-- 쿼리스트링으로 ofile, sfile날림나릶  주소 보내닉아 @{} th: -->
+	<a th:href="@{fileDown(sfile=${#strings.arraySplit(dto.storeFileName,'`')[idx.index]}, 
+					  ofile=${file})}">[[${file}]]</a>
+	
+	
+	
+	
+	  ||
+				   [[${#numbers.formatInteger(
+				  		 #strings.arraySplit(dto.fileSize, '`')[idx.index],0,'COMMA'
+				  		 )}]] Byte
+</div>
+
+<th:block th:if="${userId==empId}">
+
 게시글 비밀번호 : <input type="password" name="libPw" id="libPw" required="required" /><br/>
 <span th:if="${err_pw != null}" th:text="${err_pw}"style="color:red"/>
 <span th:if="${err_id != null}" th:text="${err_id}" style="color:red"></span><br/>
 <input type="submit" value="수정"/>
 <input type="button" value="삭제" id="delete"/>
+</th:block>
 </form>
 </body>
 </html>

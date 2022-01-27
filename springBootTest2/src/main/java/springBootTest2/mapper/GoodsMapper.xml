@@ -19,7 +19,8 @@ goods_company goodsCompany, emp_num empNum
 	update goods   
 	set  goods_name =#{goodsName}, goods_price = #{goodsPrice},
 		 goods_date = #{goodsDate}, goods_content = #{goodsContent},
-		 goods_qty = #{goodsQty}, goods_company = #{goodsCompany}
+		 goods_qty = #{goodsQty}, goods_company = #{goodsCompany},
+		  goods_images =#{goodsImages}
 	where goods_num = #{goodsNum}
 </update>
 
@@ -30,7 +31,7 @@ goods_company goodsCompany, emp_num empNum
 <select id="selectOne" parameterType="String" resultType="springBootTest2.domain.GoodsDTO">
 	select goods_num goodsNum, goods_name goodsName, goods_price goodsPrice,
 			goods_date goodsDate, goods_content goodsContent, goods_qty goodsQty,
-			goods_company goodsCompany, emp_num empNum
+			goods_company goodsCompany, emp_num empNum,  goods_images goodsImages
 	from goods
 	where goods_num=#{goodsNum}
 </select>
@@ -38,15 +39,15 @@ goods_company goodsCompany, emp_num empNum
 <select id="selectAll" resultType="springBootTest2.domain.GoodsDTO">
 	select goods_num goodsNum, goods_name goodsName, goods_price goodsPrice,
 			goods_date goodsDate, goods_content goodsContent, goods_qty goodsQty,
-			goods_company goodsCompany, emp_num empNum
+			goods_company goodsCompany, emp_num empNum, goods_images goodsImages
 	from goods
 </select>
 
 <insert id="goodsinsert" parameterType="springBootTest2.domain.GoodsDTO">
 	insert into goods (goods_num, goods_name, goods_price, goods_date, 
-	goods_content, goods_qty, goods_company, emp_num)
+	goods_content, goods_qty, goods_company, emp_num, goods_images)
 	values(#{goodsNum}, #{goodsName}, #{goodsPrice}, #{goodsDate},
-	 #{goodsContent}, #{goodsQty}, #{goodsCompany}, #{empNum} )
+	 #{goodsContent}, #{goodsQty}, #{goodsCompany}, #{empNum}, #{goodsImages})
 </insert>
 
 
