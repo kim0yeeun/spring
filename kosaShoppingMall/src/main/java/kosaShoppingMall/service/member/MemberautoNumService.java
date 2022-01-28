@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import kosaShoppingMall.command.MemberCommand;
 import kosaShoppingMall.mapper.MemberMapper;
 
 @Component
@@ -12,8 +13,9 @@ import kosaShoppingMall.mapper.MemberMapper;
 public class MemberautoNumService {
 	@Autowired
 	MemberMapper memberMapper;
-	public void execute (Model model) {
+	public void execute (MemberCommand memberCommand) {
 		String autoNum = memberMapper.autoNum();
-		model.addAttribute("memNum",autoNum);
+		//  html 에 저장띠 
+		memberCommand.setMemNum(autoNum);
 	}
 }

@@ -10,7 +10,7 @@
 	</delete>
 	<update id="memUpdate" parameterType="memDTO">
 		update member 
-		set mem_name = #{memName}, mem_addr = #{memAddr}, mem_regi_date = #{memRegiDate}, 
+		set mem_name = #{memName}, mem_id =#{memId},  mem_addr = #{memAddr}, mem_regi_date = #{memRegiDate}, 
 			mem_gender = #{memGender}, mem_phone = #{memPhone},
 			mem_birth = #{memBirth}, mem_email = #{memEmail}
 		where mem_num = #{memNum}
@@ -20,6 +20,7 @@
 				mem_addr memAddr,  mem_regi_date memRegiDate, mem_gender memGender,
 				mem_phone memPhone, mem_birth memBirth, mem_email memEmail
 		from member
+		order by mem_num
 	</select>
 	<select id="selectOne" parameterType="string" resultType="memDTO">
 		select 	mem_num memNum, mem_id memId, mem_pw memPw, mem_name memName,

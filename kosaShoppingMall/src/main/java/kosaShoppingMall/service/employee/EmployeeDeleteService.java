@@ -16,21 +16,14 @@ public class EmployeeDeleteService {
 	EmployeeMapper employeeMapper;
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	public String execute(String empId, String empPw, Model model) {
-		String path ="redirect:empList";
+	public void execute(String empId, String empPw, Model model) {
 		EmployeeDTO dto = employeeMapper.selectOne(empId);
-		model.addAttribute("employeeCommand", dto);
 		if(passwordEncoder.matches(empPw, dto.getEmpPw())) {
-			model.addAttribute("employeeCommand", dto);
-			employeeMapper.empDelete(empId);
+			Integer i = employeeMapper.empDelete(empId);
+			model.addAttribute("id", i);
 		}else {
-			model.addAttribute("employeeCommand", dto);
-			model.addAttribute("err_pw", "비밀번호가 틀립니다.");
-			path= "thymeleaf/employee/empInfo";
+			model.addAttribute("id", 0);
 		}
-		
-	
-		return path;
 	}
 
 }

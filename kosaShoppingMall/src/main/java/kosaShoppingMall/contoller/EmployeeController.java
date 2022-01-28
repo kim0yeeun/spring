@@ -46,8 +46,8 @@ public class EmployeeController {
 	@RequestMapping("empDelete")
 	public String empDelete(@RequestParam(value="empId") String empId, 
 			@RequestParam(value="empPw") String empPw, Model model) {
-		String path = employeeDeleteService.execute(empId, empPw, model);
-		return path;
+			employeeDeleteService.execute(empId, empPw, model);
+		return "thymeleaf/employee/empDel";
 	}
 	@RequestMapping(value="empUpdate", method = RequestMethod.POST)
 	public String empUpdate(EmployeeCommand employeeCommand,BindingResult result, Model model) {

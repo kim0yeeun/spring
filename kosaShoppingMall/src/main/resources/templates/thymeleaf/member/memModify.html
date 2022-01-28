@@ -6,17 +6,41 @@
 </head>
 <body>
 회원 수정 페이지입니다. <br/>
-<form action="memModify" method="post" >
+<form action="memModify" method="post" th:object="${memberCommand}">
+
+<input type="hidden" name="memPw" value="111111" /> 
+<input type="hidden" name="memPwCon" value="111111" /> 
+<!-- 임의의 값을 줌으로써 에러만 막음  -->
+
 회원번호 : <input type="text" name="memNum" readonly="readonly" th:value="${memberCommand.memNum}"/> : 자동부여 <br/>
-회원아이디 : <input type="text" name="memId" readonly="readonly" th:value="${memberCommand.memId}"/> <br/>
-이름 : <input type="text" name="memName" th:value="${memberCommand.memName}" /> <br/>
-주소 : <input type="text" name="memAddr" th:value="${memberCommand.memAddr}" /> <br/>
-등록일 : <input type="date" name="memRegiDate" th:value="${#dates.format(memberCommand.memRegiDate, 'yyyy-MM-dd')}" /> <br/>
-성별 : <input type="radio" name="memGender" value="F" checked/>여자
-          <input type="radio" name="memGender" value="M" />남자<br />
-연락처 :  <input type="tel" name="memPhone" th:value="${memberCommand.memPhone}" /> <br/>
-생년월일 :  <input type="date" name="memBirth" th:value="${#dates.format(memberCommand.memBirth, 'yyyy-MM-dd')}" /> <br/>
-이메일 :  <input type="email" name="memEmail" th:value="${memberCommand.memEmail}" /> <br/>
+
+회원아이디 : <input type="text" name="memId"  th:value="${memberCommand.memId}"/> 
+<span th:if="${#fields.hasErrors('memId')}" th:errors="*{memId}"/> <br/>
+
+이름 : <input type="text" name="memName" th:value="${memberCommand.memName}" />
+<span th:if="${#fields.hasErrors('memName')}" th:errors="*{memName}" /><br/>
+
+주소 : <input type="text" name="memAddr" th:value="${memberCommand.memAddr}" /> 
+<span th:if="${#fields.hasErrors('memAddr')}" th:errors="*{memId}" /><br/>
+
+등록일 : <input type="date" name="memRegiDate" th:value="${#dates.format(memberCommand.memRegiDate, 'yyyy-MM-dd')}" />
+<span th:if="${#fields.hasErrors('memRegiDate')}" th:errors="*{memId}" /><br/> 
+
+성별 : <input type="radio" name="memGender" value="F" th:checked="${memberCommand.memGender=='F'}"/>여자
+      <input type="radio" name="memGender" value="M" th:checked="${memberCommand.memGender=='M'}"/>남자
+<span th:if="${#fields.hasErrors('memGender')}" th:errors="*{memGender}" /><br/>
+
+연락처 :  <input type="tel" name="memPhone" th:value="${memberCommand.memPhone}" /> 
+<span th:if="${#fields.hasErrors('memPhone')}" th:errors="*{memPhone}" /><br/>
+
+생년월일 :  <input type="date" name="memBirth" th:value="${#dates.format(memberCommand.memBirth, 'yyyy-MM-dd')}" /> 
+<span th:if="${#fields.hasErrors('memBirth')}" th:errors="*{memBirth}" /><br/>
+
+이메일 :  <input type="email" name="memEmail" th:value="${memberCommand.memEmail}" /> 
+<span th:if="${#fields.hasErrors('memEmail')}" th:errors="*{memEmail}" /><br/>
+
 <input type="submit" value="전송"/> <br/>
+
+
 </body>
 </html>

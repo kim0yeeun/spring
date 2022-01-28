@@ -4,16 +4,62 @@
 <meta charset="UTF-8">
 <title>memInfo</title>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<!-- ajax사용하기 위한 라이브러리 -->
+
 <script>
 	$(function(){
 		$("#memDelete").click(function(){
-			location.href="memDelete?memNum=[[${memberCommand.memNum}]]"
+			//location.href="../memDelete?memNum=[[${memberCommand.memNum}]]"
+			$.ajax({
+				type:"post",
+				url : "../memDelete",
+				data : {"memNum" : "[[${memberCommand.memNum}]]"},
+				dataType : "text",
+				success :function(result){
+					if(result.trim()=='1'){ // 양쪽 공백문자를 없애줌 .trim 꺼억
+						alert("회원이 정상적으로 삭제되었습니다.");
+						location.href="../memList"; // ../ pathvarible로 넘어왔으니까 이동하고 싶은 페이지가 있으면 ../! 
+					}else {
+						alert("회원이 삭제되지 않았습니다.");
+						return false;
+					}
+				},
+				error : function(){
+					alert('에러');
+					return;
+				}
+				
+			});
 		});
 		$("#memList").click(function(){
-			location.href="memList"
+			location.href="../memList";
 		});
 	});
+	function del(){
+		$.ajax({
+			type:"post",
+			url : "../memDelete",
+			data : {"memNum" : "[[${memberCommand.memNum}]]"},
+			dataType : "text",
+			success :function(result){
+				if(result.trim()=='1'){ // 양쪽 공백문자를 없애줌 .trim
+					alert("회원이 정상적으로 삭제되었습니다.");
+					location.href="../memList"; // ../ pathvarible로 넘어왔으니까 이동하고 싶은 페이지가 있으면 ../! 
+				}else {
+					alert("회원이 삭제되지 않았습니다.");
+					return false;
+				}
+			},
+			error : function(){
+				alert('에러');
+				return;
+			}
+			
+		});
+	};
 </script>
+
 </head>
 <body>
 회원 상세페이지 입니다. <br/>
@@ -27,12 +73,14 @@
 연락처 :  [[${memberCommand.memPhone}]] <br/>
 생년월일 :  <span th:text="${#dates.format(memberCommand.memBirth,'yyyy-MM-dd')}"></span><br />
 이메일 : [[${memberCommand.memEmail}]] <br/>
-<form action="memModify" method="get">
+
+<form action="../memModify" method="get"> <!--  주소 하나식 줄여,,,? ../  -->
 <input type="hidden" name="memNum" th:value="${memberCommand.memNum}">
 <input type="submit" value="수정"/>
-<input type="button" value="삭제" id="memDelete"> 
-<input type="button" value="회원목록" id="memList"> 
-
+<input type="button" value="jquery삭제" id="memDelete"/> 
+<input type="button" value="function삭제" onclick ="del()"/> 
+<input type="button" value="회원목록" id="memList"/> 
 </form>
+
 </body>
 </html>

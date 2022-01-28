@@ -15,6 +15,7 @@ public class MemberUpdateService {
 	MemberMapper memberMapper;
 	public void execute(MemberCommand memberCommand) {
 		MemberDTO dto = memberMapper.selectOne(memberCommand.getMemNum());
+		dto.setMemId(memberCommand.getMemId());
 		dto.setMemAddr(memberCommand.getMemAddr());
 		dto.setMemBirth(memberCommand.getMemBirth());
 		dto.setMemEmail(memberCommand.getMemEmail());
